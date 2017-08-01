@@ -1,12 +1,12 @@
 package com.neoworks.interviewtests.graph;
 
-/**
- * Created by jguanz on 7/27/17.
- */
+import java.util.*;
+
 public class Person {
     String name;
     String email = "";
     int age;
+    private Map<Person, RelationshipType> _relationships = new HashMap();
 
     Person (String name, String email, int age){
         this.name = name;
@@ -14,7 +14,27 @@ public class Person {
         this.age = age;
     }
 
+    public void addRelationship(Person person, RelationshipType type){
+        _relationships.put(person, type);
+    }
+
+    public Map getRelationships(){
+        return _relationships;
+    }
+
+    public int getNumberOfRelationships(){
+        if(_relationships.isEmpty()){
+            return 0;
+        } else {
+            return _relationships.size();
+        }
+    }
+
     public String toString(){
-        return String.format("name: %s, email: %s, age: %s", name, email, age);
+        Set<String> relationshipsToString = new HashSet();
+        for(Person p: _relationships.keySet()){
+            relationshipsToString.add(p.name);
+        }
+        return String.format("name: %s, email: %s, age: %s, relationships: %s", name, email, age, relationshipsToString);
     }
 }

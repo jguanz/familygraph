@@ -1,16 +1,11 @@
 package com.neoworks.interviewtests.graph;
 
-import com.sun.media.sound.InvalidFormatException;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-/**
- * Created by jguanz on 7/27/17.
- */
-public class PersonFileDAO implements IDataAccessObject {
+public class PersonFileDAO implements IDataAccessObject  {
     private static final String parseCharacter = ",";
     private static final int expectedNumberOfFields = 3;
 
@@ -45,17 +40,17 @@ public class PersonFileDAO implements IDataAccessObject {
             int age = Integer.parseInt(personFields[2]);
 
             _persons.put(email, new Person(name, email, age));
-        } catch (InvalidFormatException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(String.format("Bypassed invalid formatted record: %s", e));
         }
 
     }
 
-    private String[] parseCSV(String currentLine) throws InvalidFormatException {
+    private String[] parseCSV(String currentLine) throws IllegalArgumentException {
         String[] parsedInput = currentLine.split(parseCharacter);
 
         if (parsedInput.length != expectedNumberOfFields) {
-            throw new InvalidFormatException();
+            throw new IllegalArgumentException();
         }
 
         return parsedInput;

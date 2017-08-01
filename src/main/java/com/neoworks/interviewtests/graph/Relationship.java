@@ -1,8 +1,5 @@
 package com.neoworks.interviewtests.graph;
 
-/**
- * Created by jguanz on 7/27/17.
- */
 public class Relationship {
     String email;
     RelationshipType type;
